@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://dacrx1cw4jy53"]
+
+[ext_resource type="Script" path="res://rigid_body_2d.gd" id="1_4080l"]
+[ext_resource type="Texture2D" uid="uid://bgvuiu2empikg" path="res://enemyFlyingAlt_1.png" id="1_f3hwk"]
+[ext_resource type="Texture2D" uid="uid://b0nfliggt6wi8" path="res://art/enemyFlyingAlt_2.png" id="2_fdqyd"]
+[ext_resource type="Texture2D" uid="uid://dexts00da27l0" path="res://art/enemySwimming_2.png" id="3_ualla"]
+[ext_resource type="Texture2D" uid="uid://0dvq0qkfjsaa" path="res://art/enemySwimming_1.png" id="4_aaqav"]
+[ext_resource type="Texture2D" uid="uid://bg7cm5l1hbaig" path="res://art/enemyWalking_2.png" id="5_w8tlf"]
+[ext_resource type="Texture2D" uid="uid://la8uemm1p7lr" path="res://art/enemyWalking_1.png" id="6_t1whq"]
+[ext_resource type="Script" path="res://VisibleOnScreenNotifier2D.gd" id="8_b48jl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7iwld"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f3hwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fdqyd")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ualla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aaqav")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_w8tlf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t1whq")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ti33o"]
+
+[node name="Mob" type="RigidBody2D"]
+collision_mask = 0
+script = ExtResource("1_4080l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_7iwld")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ti33o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+script = ExtResource("8_b48jl")
